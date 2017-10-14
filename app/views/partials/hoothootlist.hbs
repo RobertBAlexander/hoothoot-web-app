@@ -1,0 +1,27 @@
+<section class="ui raised segment">
+  <div class="ui grid">
+    <aside class="six wide column">
+      <img src="images/owl_and_cat.jpg" class="ui medium image">
+    </aside>
+    <article class="eight wide column">
+      <table class="ui celled table segment">
+        <thead>
+        <tr>
+          <th>Hashtag</th>
+          <th>The Hoot Itself!</th>
+          <th>Hooter-</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each hoots}}
+          <tr>
+            <td> {{hashtag}} </td>
+            <td> {{hootmain}} </td>
+            <td> {{user}} </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </article>
+  </div>
+</section>

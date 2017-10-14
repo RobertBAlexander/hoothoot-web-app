@@ -3,26 +3,31 @@
  */
 'use strict';
 
+'use strict';
+
 exports.home = {
 
   handler: (request, reply) => {
-    reply.file('./app/views/main.html');
+    reply.view('home', { title: 'Welcome to Hoot Hoots' });
   },
 
 };
 
-exports.signup = {
+exports.report = {
 
-  handler: (request, reply) => {
-    reply.file('./app/views/signup.html');
+  handler: function (request, reply) {
+    reply.view('report', { title: 'Hoots to Date', hoots: this.hoots, });
   },
 
 };
 
-exports.login = {
+exports.hoot = {
 
-  handler: (request, reply) => {
-    reply.file('./app/views/login.html');
+  handler: function (request, reply) {
+    const data = request.payload;
+    data.user = 'homer@simpson.com'; //temporary full e-mail until proper user storage occurs
+    this.hoots.push(data);
+    reply.redirect('/report');
   },
 
 };

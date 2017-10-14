@@ -1,0 +1,15 @@
+{
+  "name": "hoothoot-app",
+  "version": "1.0.0",
+  "description": "An app for short twitter messages sent in the evening.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Robert Alexander",
+  "license": "ISC",
+  "dependencies": {
+    "hapi": "^16.6.2",
+    "inert": "^4.2.1"
+  }
+}

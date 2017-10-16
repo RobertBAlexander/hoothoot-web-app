@@ -3,7 +3,8 @@
  */
 'use strict';
 
-'use strict';
+const Hoot = require('../models/hoot');
+const User = require('../models/user');
 
 exports.home = {
 
@@ -16,7 +17,14 @@ exports.home = {
 exports.report = {
 
   handler: function (request, reply) {
-    reply.view('report', { title: 'Hoots to Date', hoots: this.hoots, });
+    Hoot.find({}).populate('hooter').then(allHoots => {
+      reply.view('report', {
+        title: 'Hoots to Date',
+        hoots: allHoots,
+      });
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 
 };
@@ -24,10 +32,17 @@ exports.report = {
 exports.hoot = {
 
   handler: function (request, reply) {
-    const data = request.payload;
-    data.user = 'homer@simpson.com'; //temporary full e-mail until proper user storage occurs
-    this.hoots.push(data);
-    reply.redirect('/report');
+    var userEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: userEmail }).then(user => {
+      let data = request.payload;
+      const hoot = new Hoot(data);
+      hoot.hooter = user._id;
+      return hoot.save();
+    }).then(newHoot => {
+      reply.redirect('/report');
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 
 };

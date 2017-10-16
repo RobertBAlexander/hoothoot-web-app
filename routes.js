@@ -12,12 +12,13 @@ module.exports = [
   { method: 'GET', path: '/login', config: Accounts.login },
   { method: 'POST', path: '/login', config: Accounts.authenticate },
   { method: 'GET', path: '/logout', config: Accounts.logout },
+  { method: 'POST', path: '/register', config: Accounts.register },
+  { method: 'GET', path: '/settings', config: Accounts.viewSettings },
+  { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
   { method: 'GET', path: '/home', config: Hoots.home },
   { method: 'GET', path: '/report', config: Hoots.report },
-
   { method: 'POST', path: '/hoot', config: Hoots.hoot },
-  { method: 'POST', path: '/register', config: Accounts.register },
 
   {
     method: 'GET',

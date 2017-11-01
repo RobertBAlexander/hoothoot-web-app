@@ -2,8 +2,8 @@
 
 const Hapi = require('hapi');
 
-var server = new Hapi.Server();
-server.connection({ port: process.env.PORT || 4000 });
+const server = new Hapi.Server();
+server.connection({ port: process.env.PORT || 5000 });
 require('./app/models/db');
 
 server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err => {
@@ -37,6 +37,7 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
   });
 
   server.route(require('./routes'));
+  server.route(require('./routesapi'));
 
   server.start(err => {
       if (err) {

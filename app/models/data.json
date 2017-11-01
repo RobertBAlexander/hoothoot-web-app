@@ -1,0 +1,41 @@
+{
+  "users": {
+    "_model": "User",
+    "homer": {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    "marge": {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    },
+    "bart": {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret"
+    }
+  },
+  "donations": {
+    "_model": "Donation",
+    "one": {
+      "hashtag": "Hoot Topic",
+      "hootmain": "This is nice",
+      "hooter": "->users.bart"
+    },
+    "two": {
+      "hashtag": "Night snack",
+      "hootmain": "Testing my hoots",
+      "hooter": "->users.marge"
+    },
+    "three": {
+      "hashtag": "Owlcoholic",
+      "hootmain": "I love hooting",
+      "hooter": "->users.homer"
+    }
+  }
+}

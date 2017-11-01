@@ -4,6 +4,7 @@
 'use strict';
 const User = require('../models/user');
 const Joi = require('joi');
+const uuid = require('uuid');
 
 exports.main = {
   auth: false,
@@ -31,6 +32,7 @@ exports.register = {
       lastName: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      id: Joi.string().required(),
     },
 
     failAction: function (request, reply, source, error) {

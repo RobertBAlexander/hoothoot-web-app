@@ -18,7 +18,9 @@ module.exports = [
 
   { method: 'GET', path: '/home', config: Hoots.home },
   { method: 'GET', path: '/report', config: Hoots.report },
+
   { method: 'POST', path: '/hoot', config: Hoots.hoot },
+  { method: 'POST', path: '/deletehoot', config: Hoots.deletehoot },
 
   {
     method: 'GET',

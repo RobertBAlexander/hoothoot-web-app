@@ -4,24 +4,46 @@
       <img src="images/owl_and_cat.jpg" class="ui medium image">
     </aside>
     <article class="eight wide column">
+      <form class="ui form"  action="/deletehoot" method="POST">
+      {{#each hoots}}
       <table class="ui celled table segment">
+
         <thead>
         <tr>
-          <th>Hashtag</th>
-          <th>The Hoot Itself!</th>
-          <th>Hooter-</th>
+          <th>{{hooter.firstName}} {{hooter.lastName}} says:</th>
+          <th>                <div class="ui checkbox">
+            <input name="{{_id}}" type="checkbox">
+            <label>Delete</label>
+          </div></th>
         </tr>
         </thead>
         <tbody>
-        {{#each hoots}}
+
           <tr>
-            <td> {{hashtag}} </td>
-            <td> {{hootmain}} </td>
-            <td> {{hooter.firstName}} {{hooter.lastName}} </td>
+            <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>
+            <td>#{{hashtag}} <br><br><br><br> on The date posted </td>
           </tr>
-        {{/each}}
+
         </tbody>
+
       </table>
+        {{/each}}
+        <button  class="ui red submit icon button"> Delete Selected
+        </button>
+      </form>
     </article>
   </div>
 </section>
+<script>
+  $('.ui.checkbox')
+      .checkbox()
+  ;
+  // Listen for click on toggle checkbox
+  $('#selectAll').click(function(event) {
+    if(this.checked) {
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    }
+  });
+</script>

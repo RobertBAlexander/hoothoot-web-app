@@ -15,14 +15,47 @@
           </div>
           <br><br>
           <div class="text"><b>Enter your Hoot</b></div>
-          <label>Hoot:</label> <input placeholder="Orly?" type="text" name="hootmain">
-          <br><br>
+          <label>Hoot:</label> <textarea class="hootmain" placeholder="Orly?" type="text" name="hootmain" rows="3" cols="30"></textarea>
+          <br>
+          <span class="countdown"></span>
+          <br>
           <button class="ui blue submit button">Toot your Hoot</button>
         </form>
+        {{> formerror }}
       </div>
     </div>
     <aside class="six wide column">
       <img src="images/two_owls_on_fence.jpg" class="ui medium image">
     </aside>
   </div>
+  <!–– reference for below functions: https://stackoverflow.com/questions/2136647/character-countdown-like-on-twitter
+  https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery -->
 </section>
+<script>
+  function updateCountdown() {
+    // 140 is the max message length
+    var remaining = 140 - jQuery('.hootmain').val().length;
+    if (remaining < 0)
+     {
+      $('.countdown').css({ 'color': 'red', 'font-size': '120%' });
+      jQuery('.countdown').text(remaining + ' characters remaining. This Hoot is too long, please reduce it!');
+     }
+    else if (remaining == 1)
+     {
+      $('.countdown').css({ 'color': 'black', 'font-size': '100%' });
+      jQuery('.countdown').text(remaining + ' character remaining.');
+     }
+    else
+     {
+      $('.countdown').css({ 'color': 'black', 'font-size': '100%' });
+      jQuery('.countdown').text(remaining + ' characters remaining.');
+     }
+
+  }
+
+  jQuery(document).ready(function($) {
+    updateCountdown();
+    $('.hootmain').change(updateCountdown);
+    $('.hootmain').keyup(updateCountdown);
+  });
+  </script>

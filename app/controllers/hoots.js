@@ -5,6 +5,7 @@
 
 const Hoot = require('../models/hoot');
 const User = require('../models/user');
+const Joi = require('joi');
 
 exports.home = {
 
@@ -31,6 +32,26 @@ exports.report = {
 
 exports.hoot = {
 
+  validate: {
+
+    payload: {
+      hootmain: Joi.string().min(3).max(140).required(),
+      hashtag: Joi,
+    },
+
+    failAction: function (request, reply, source, error) {
+      reply.view('home', {
+        title: 'Hoot creation error',
+        errors: error.data.details,
+      }).code(400);
+    },
+
+    options: {
+      abortEarly: false,
+    },
+
+  },
+
   handler: function (request, reply) {
     var userEmail = request.auth.credentials.loggedInUser;
     User.findOne({ email: userEmail }).then(user => {
@@ -45,4 +66,19 @@ exports.hoot = {
     });
   },
 
+};
+
+exports.deletehoot = {
+  handler: function (request, reply) {
+    const hoots = Object.keys(request.payload);
+    hoots.forEach(function (id) {
+      Hoot.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+        console.log('Deleted id: ' + id);
+      });
+    });
+
+    reply.redirect('/report');
+
+  },
 };

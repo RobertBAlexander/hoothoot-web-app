@@ -20,8 +20,8 @@
       "password": "secret"
     }
   },
-  "donations": {
-    "_model": "Donation",
+  "hoots": {
+    "_model": "Hoot",
     "one": {
       "hashtag": "Hoot Topic",
       "hootmain": "This is nice",

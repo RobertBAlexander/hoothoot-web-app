@@ -4,6 +4,7 @@
 const Accounts = require('./app/controllers/accounts');
 const Hoots = require('./app/controllers/hoots');
 const Assets = require('./app/controllers/assets');
+const Administrate = require('./app/controllers/administrate');
 
 module.exports = [
 
@@ -21,6 +22,12 @@ module.exports = [
 
   { method: 'POST', path: '/hoot', config: Hoots.hoot },
   { method: 'POST', path: '/deletehoot', config: Hoots.deletehoot },
+
+  { method: 'GET', path: '/adminhome', config: Administrate.adminhome },
+  { method: 'GET', path: '/usercreation', config: Administrate.usercreation },
+  { method: 'POST', path: '/newuser', config: Administrate.newuser },
+  { method: 'GET', path: '/viewuser/{id}', config: Administrate.viewuser },
+  { method: 'GET', path: '/deleteuser/{id}', config: Administrate.deleteuser },
 
   {
     method: 'GET',

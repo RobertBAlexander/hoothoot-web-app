@@ -32,7 +32,6 @@ exports.register = {
       lastName: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
-      id: Joi.string().required(),
     },
 
     failAction: function (request, reply, source, error) {
@@ -49,7 +48,8 @@ exports.register = {
   },
 
   handler: function (request, reply) {
-    const user = new User(request.payload);
+    let data = request.payload;
+    const user = new User(data);
 
     user.save().then(newUser => {
       reply.redirect('/login');
@@ -92,19 +92,28 @@ exports.authenticate = {
   },
   handler: function (request, reply) {
     const user = request.payload;
-    User.findOne({ email: user.email }).then(foundUser => {
-      if (foundUser && foundUser.password === user.password) {
-        request.cookieAuth.set({
-          loggedIn: true,
-          loggedInUser: user.email,
-        });
-        reply.redirect('/home');
-      } else {
-        reply.redirect('/signup');
-      }
-    }).catch(err => {
-      reply.redirect('/');
-    });
+    if (user.email == 'admin@hoot.com' && user.password == 'admin')
+    {
+      request.cookieAuth.set({
+        loggedIn: true,
+        loggedInUser: user.email,
+      });
+      reply.redirect('/adminhome');
+    } else {
+      User.findOne({ email: user.email }).then(foundUser => {
+        if (foundUser && foundUser.password === user.password) {
+          request.cookieAuth.set({
+            loggedIn: true,
+            loggedInUser: user.email,
+          });
+          reply.redirect('/home');
+        } else {
+          reply.redirect('/signup');
+        }
+      }).catch(err => {
+        reply.redirect('/');
+      });
+    }
   },
 
 };

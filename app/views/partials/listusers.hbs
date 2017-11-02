@@ -1,0 +1,22 @@
+<table class="ui fixed table">
+  <tbody>
+  <div class="ui bulleted list">
+    {{#each users}} <!--supposed to get the stuff from EVERY member in a list order.-->
+    <tr>
+      <td>
+        <div class="column">
+          <p class="ui wechat icon">
+            <a href="/viewuser/{{id}}"><h3><i class="ui blue wechat icon"></i>{{firstName}}
+              {{lastName}}</h3></a></p>
+        </div>
+      </td>
+      <td>
+        <div class="column right aligned">
+          <a href="/deleteuser/{{id}}" class="ui red
+               icon button"><i class="icon trash"></i>  Delete Member</a>
+        </div>
+      </td>
+    {{/each}}
+  </div>
+  </tbody>
+</table>

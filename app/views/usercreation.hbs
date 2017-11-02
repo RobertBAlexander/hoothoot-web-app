@@ -1,0 +1,28 @@
+{{> adminmenu _id="usercreation" }}
+
+<section class="ui raised segment">
+
+  <section class="ui raised segment">
+    <div class="ui grid">
+      <div class="ui ten wide column">
+        <div class="ui stacked fluid form segment">
+          <form action="/newuser" method="POST">
+            <h3 class="ui header">New User Details</h3>
+            {{> addupdateuser }}
+          </form>
+          {{> formerror }}
+        </div>
+      </div>
+      <aside class="ui five wide column">
+        <img src="images/many_owls.png" class="ui medium image">
+      </aside>
+    </div>
+  </section>
+
+  <div class="ui  divider"></div>
+
+  <div class="ui teal progress" data-percent="${progress}" id="mainprogress">
+    <div class="bar"></div>
+  </div>
+
+</section>

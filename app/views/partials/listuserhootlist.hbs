@@ -1,0 +1,38 @@
+<section class="ui raised segment">
+  <div class="ui grid">
+    <aside class="six wide column">
+      <img src="images/owl_and_cat.jpg" class="ui medium image">
+    </aside>
+    <article class="eight wide column">
+      <form class="ui form"  action="/deletelistuserhoot/{{id}}" method="POST">
+        {{#each hoots}}
+          <table class="ui celled table segment">
+
+            <thead>
+            <tr>
+              <th>{{hooter.firstName}} {{hooter.lastName}} says:</th>
+              <th>                <div class="ui checkbox">
+                <input name="{{_id}}" type="checkbox">
+                <label>Delete</label>
+              </div></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+              <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>
+              <td>#{{hashtag}} <br><br><br><br> on The date posted </td>
+            </tr>
+
+            </tbody>
+
+          </table>
+        {{/each}}
+        <button  class="ui red submit icon button"> Delete Selected
+        </button>
+      </form>
+    </article>
+  </div>
+</section>
+<script src="js/checkbox.js">
+</script>

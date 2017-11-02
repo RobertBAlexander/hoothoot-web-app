@@ -28,6 +28,7 @@ module.exports = [
   { method: 'POST', path: '/newuser', config: Administrate.newuser },
   { method: 'GET', path: '/viewuser/{id}', config: Administrate.viewuser },
   { method: 'GET', path: '/deleteuser/{id}', config: Administrate.deleteuser },
+  { method: 'POST', path: '/deletelistuserhoot/{id}', config: Administrate.deletelistuserhoot },
 
   {
     method: 'GET',

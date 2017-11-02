@@ -89,10 +89,26 @@ exports.viewuser = {
       reply.view('viewuser', {
         title: 'Hoots to Date for this user',
         hoots: userHoots,
+        id: userId,
       });
     }).catch(err => {
       reply.redirect('/');
     });
   },
+};
 
+exports.deletelistuserhoot = {
+  handler: function (request, reply) {
+    const userId = request.params.id;
+    const hoots = Object.keys(request.payload);
+    hoots.forEach(function (id) {
+      Hoot.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+        console.log('Deleted id: ' + id);
+      });
+    });
+
+    reply.redirect('/adminhome');
+
+  },
 };

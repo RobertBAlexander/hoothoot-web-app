@@ -19,9 +19,12 @@ module.exports = [
 
   { method: 'GET', path: '/home', config: Hoots.home },
   { method: 'GET', path: '/report', config: Hoots.report },
+  { method: 'GET', path: '/allhootslist', config: Hoots.allhootslist },
+  { method: 'GET', path: '/viewotheruser/{id}', config: Hoots.viewotheruser },
 
   { method: 'POST', path: '/hoot', config: Hoots.hoot },
   { method: 'POST', path: '/deletehoot', config: Hoots.deletehoot },
+  { method: 'POST', path: '/deleteallhoots', config: Hoots.deleteallhoots },
 
   { method: 'GET', path: '/adminhome', config: Administrate.adminhome },
   { method: 'GET', path: '/usercreation', config: Administrate.usercreation },

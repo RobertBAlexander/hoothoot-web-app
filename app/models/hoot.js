@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const hootSchema = mongoose.Schema({
   hashtag: String,
   hootmain: String,
+  date: String,
   hooter: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

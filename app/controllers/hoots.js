@@ -18,16 +18,53 @@ exports.home = {
 exports.report = {
 
   handler: function (request, reply) {
-    Hoot.find({}).populate('hooter').then(allHoots => {
-      reply.view('report', {
-        title: 'Hoots to Date',
-        hoots: allHoots,
+    const userEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: userEmail }).then(currentUser => {
+      Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' }).then(hootList => {
+        reply.view('report', {
+          title: 'Hoots to Date',
+          hoots: hootList,
+        });
+      }).catch(err => {
+        reply.redirect('/');
+      });
+    });
+  },
+
+};
+
+exports.allhootslist = {
+
+  handler: function (request, reply) {
+    User.find({}).populate('user').then(allUsers => {
+      Hoot.find({}).populate('hooter').sort({ date: 'desc' }).then(allHoots => {
+        reply.view('allhootslist', {
+          title: 'All Hoots to Date',
+          hoots: allHoots,
+          users: allUsers,
+        });
+      }).catch(err => {
+        reply.redirect('/');
+      });
+    });
+  },
+
+};
+
+exports.viewotheruser = {
+
+  handler: function (request, reply) {
+    const userId = request.params.id;
+    Hoot.find({ hooter: userId }).populate('hooter').sort({ date: 'desc' }).then(userHoots => {
+      reply.view('viewotheruser', {
+        title: 'Hoots to Date for this user',
+        hoots: userHoots,
+        id: userId,
       });
     }).catch(err => {
       reply.redirect('/');
     });
   },
-
 };
 
 exports.hoot = {
@@ -57,7 +94,9 @@ exports.hoot = {
     User.findOne({ email: userEmail }).then(user => {
       let data = request.payload;
       const hoot = new Hoot(data);
+      const date = new Date().toString().substring(0, 25);
       hoot.hooter = user._id;
+      hoot.date = date;
       return hoot.save();
     }).then(newHoot => {
       reply.redirect('/report');
@@ -80,5 +119,20 @@ exports.deletehoot = {
 
     reply.redirect('/report');
 
+  },
+};
+
+exports.deleteallhoots = {
+
+  handler: function (request, reply) {
+    const userEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: userEmail }).then(user => {
+      Hoot.remove({ hooter: user._id }).then(success => {
+        console.log('Removed users tweets:' + userId);
+        reply.redirect('/report');
+      }).catch(err => {
+        reply.redirect('/report');
+      });
+    });
   },
 };

@@ -85,7 +85,7 @@ exports.viewuser = {
 
   handler: function (request, reply) {
     const userId = request.params.id;
-    Hoot.find({ hooter: userId }).populate('hooter').then(userHoots => {
+    Hoot.find({ hooter: userId }).populate('hooter').sort({ date: 'desc' }).then(userHoots => {
       reply.view('viewuser', {
         title: 'Hoots to Date for this user',
         hoots: userHoots,

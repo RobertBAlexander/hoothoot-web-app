@@ -1,0 +1,27 @@
+{{> mainmenu _id="allhootslist" }}
+
+<section class="ui raised segment">
+<table class="ui fixed table">
+  <tbody>
+  <div class="ui bulleted list">
+    {{#each users}}
+    <tr>
+      <td>
+        <div class="column">
+          <p class="ui wechat icon">
+            <a href="/viewotheruser/{{id}}"><h3><i class="ui blue wechat icon"></i>{{firstName}}
+              {{lastName}}</h3></a></p>
+        </div>
+      </td>
+    {{/each}}
+  </div>
+  </tbody>
+</table>
+
+  {{> fullhootslist }}
+
+  <div class="ui  divider"></div>
+
+  </div>
+
+</section>

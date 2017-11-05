@@ -1,0 +1,34 @@
+<section class="ui raised segment">
+  <div class="ui grid">
+    <aside class="six wide column">
+      <img src="images/owl_and_cat.jpg" class="ui medium image">
+    </aside>
+    <article class="eight wide column">
+      {{#if hoots}}
+          {{#each hoots}}
+            <table class="ui celled table segment">
+
+              <thead>
+              <tr>
+                <th>{{hooter.firstName}} {{hooter.lastName}} says:</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr>
+                <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>
+                <td>{{#if hashtag}}#{{/if}}{{hashtag}} <br><br><br><br> {{date}} </td>
+              </tr>
+
+              </tbody>
+
+            </table>
+          {{/each}}
+      {{/if}}
+  {{#unless hoots}}
+    <h1>There seems to be no hoots here!</h1>
+  {{/unless}}
+    </article>
+  </div>
+</section>

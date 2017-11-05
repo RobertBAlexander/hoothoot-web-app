@@ -4,6 +4,7 @@
       <img src="images/owl_and_cat.jpg" class="ui medium image">
     </aside>
     <article class="eight wide column">
+      {{#if hoots}}
       <form class="ui form"  action="/deletehoot" method="POST">
       {{#each hoots}}
       <table class="ui celled table segment">
@@ -21,7 +22,7 @@
 
           <tr>
             <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>
-            <td>#{{hashtag}} <br><br><br><br> on The date posted </td>
+            <td>{{#if hashtag}}#{{/if}}{{hashtag}} <br><br><br><br> {{date}} </td>
           </tr>
 
         </tbody>
@@ -30,7 +31,11 @@
         {{/each}}
         <button  class="ui red submit icon button"> Delete Selected
         </button>
-      </form>
+      </form><br><br>
+        <form class="ui form" action="/deleteallhoots" method="POST">
+          <button class="ui red submit icon button">Delete All My Hoots</button>
+        </form>
+      {{/if}}
     </article>
   </div>
 </section>

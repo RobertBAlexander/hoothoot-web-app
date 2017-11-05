@@ -1,6 +1,7 @@
 /**
  * Created by Robert Alexander on 16/10/2017.
  */
+//Not currently used, as workaround in place for admin access
 
 'use strict';
 

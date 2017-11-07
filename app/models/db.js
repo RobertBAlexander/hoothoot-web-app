@@ -8,9 +8,9 @@ mongoose.Promise = global.Promise;
 
 let dbURI = 'mongodb://hoothootuser:secret@ds121565.mlab.com:21565/hoothoot-web';
 //let dbURI = 'mongodb://localhost/hoot';
-if (process.env.NODE_ENV === 'production') {
-  dbURI = process.env.MONGODB_URI;
-}
+//if (process.env.NODE_ENV === 'production') {
+ // dbURI = process.env.MONGODB_URI;
+//}
 
 mongoose.connect(dbURI);
 

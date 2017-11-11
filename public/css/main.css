@@ -57,7 +57,7 @@ menus only*/
     padding: 0;
 }
 
-.navigation li
+/*.navigation li
 {
     text-align: center;
     background-color: #4C6169;
@@ -76,7 +76,7 @@ menus only*/
 .navigation a:hover
 {
     color: yellow;
-}
+}*/
 
 li.current
 {

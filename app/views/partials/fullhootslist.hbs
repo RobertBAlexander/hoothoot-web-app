@@ -1,4 +1,4 @@
-<section class="ui raised segment">
+<!--<section class="ui raised segment">-->
   <div class="ui grid">
     <aside class="six wide column">
       <img src="images/owl_and_cat.jpg" class="ui medium image">
@@ -6,15 +6,15 @@
     <article class="eight wide column">
       {{#if hoots}}
           {{#each hoots}}
-            <table class="ui celled table segment">
+            <table class="ui celled table segment" style="color:#ffffff">
 
               <thead>
               <tr>
-                <th>{{hooter.firstName}} {{hooter.lastName}} says:</th>
-                <th></th>
+                <th id="lightpurple" style="color:#ffffff">{{hooter.firstName}} {{hooter.lastName}} says:</th>
+                <th id="lightpurple" style="color:#ffffff"></th>
               </tr>
               </thead>
-              <tbody>
+              <tbody id="purple">
 
               <tr>
                 <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>
@@ -31,4 +31,5 @@
   {{/unless}}
     </article>
   </div>
-</section>
+<!--
+</section>-->

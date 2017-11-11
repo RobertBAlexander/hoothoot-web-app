@@ -1,43 +1,50 @@
-<section class="ui raised segment">
+<div class="stars">
   <div class="ui grid">
     <aside class="six wide column">
       <img src="images/owl_and_cat.jpg" class="ui medium image">
     </aside>
     <article class="eight wide column">
       {{#if hoots}}
-      <form class="ui form"  action="/deletehoot" method="POST">
-      {{#each hoots}}
-      <table class="ui celled table segment">
+        <form class="ui form" action="/deletehoot" method="POST">
+          {{#each hoots}}
+            <table class="ui celled table segment" style="color:#ffffff">
 
-        <thead>
-        <tr>
-          <th>{{hooter.firstName}} {{hooter.lastName}} says:</th>
-          <th>                <div class="ui checkbox">
-            <input name="{{_id}}" type="checkbox">
-            <label>Delete</label>
-          </div></th>
-        </tr>
-        </thead>
-        <tbody>
+              <thead>
+              <tr>
+                <th id="lightpurple" style="color:#ffffff">{{hooter.firstName}} {{hooter.lastName}} says:</th>
+                <th id="lightpurple" style="color:#ffffff">
+                  <div class="ui checkbox">
+                    <input name="{{_id}}" type="checkbox">
+                    <label style="color:#ffffff">Delete</label>
+                  </div>
+                </th>
+              </tr>
+              </thead>
+              <tbody id="purple">
 
-          <tr>
-            <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>
-            <td>{{#if hashtag}}#{{/if}}{{hashtag}} <br><br><br><br> {{date}} </td>
-          </tr>
+              <tr>
+                <td>
+                  <div style="height: 100px; width: 200px;">{{hootmain}}</div>
+                </td>
+                <td>{{#if hashtag}}#{{/if}}{{hashtag}} <br><br><br><br> {{date}} </td>
+              </tr>
 
-        </tbody>
+              </tbody>
 
-      </table>
-        {{/each}}
-        <button  class="ui red submit icon button"> Delete Selected
-        </button>
-      </form><br><br>
-        <form class="ui form" action="/deleteallhoots" method="POST">
-          <button class="ui red submit icon button">Delete All My Hoots</button>
+            </table>
+          {{/each}}
+          <button class="ui red submit icon button"> Delete Selected
+          </button>
+         <!-- &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-->
+          <form class="ui form " action="/deleteallhoots" method="POST">
+            <button class="ui red submit icon button" style="float: right;">Delete All My Hoots</button>
+          </form>
         </form>
+        <br><br>
+
       {{/if}}
     </article>
   </div>
-</section>
+</div>
 <script src="js/checkbox.js">
 </script>

@@ -1,8 +1,9 @@
-<section class="ui raised segment">
+<!--<section class="ui raised segment">-->
   <div class="ui grid ">
+    <!--<div class ="sunset">-->
     <div class="ui form six wide column">
-      <div class="ui stacked segment">
-        <form action="/hoot" method="POST">
+      <div class="ui segment " id="purple" >
+        <form action="/hoot" method="POST" style="color:#ffffff">
           <div class="ui dropdown" name="hashtag">
             <input type="hidden" name="hashtag">
             <div class="text">What Hashtag?</div>
@@ -19,7 +20,7 @@
           <br>
           <span class="countdown"></span>
           <br>
-          <button class="ui blue submit button">Toot your Hoot</button>
+          <button class="ui teal submit button">Toot your Hoot</button>
         </form>
         {{> formerror }}
       </div>
@@ -28,26 +29,27 @@
       <img src="images/two_owls_on_fence.jpg" class="ui medium image">
     </aside>
   </div>
+  <!--</div>-->
   <!–– reference for below functions: https://stackoverflow.com/questions/2136647/character-countdown-like-on-twitter
   https://stackoverflow.com/questions/2001366/how-can-i-change-the-text-color-with-jquery -->
-</section>
+<!--</section>-->
 <script>
   function updateCountdown() {
     // 140 is the max message length
     var remaining = 140 - jQuery('.hootmain').val().length;
     if (remaining < 0)
      {
-      $('.countdown').css({ 'color': 'red', 'font-size': '120%' });
-      jQuery('.countdown').text(remaining + ' characters remaining. This Hoot is too long, please reduce it!');
+      $('.countdown').css({ 'color': 'red', 'font-size': '100%' });
+      jQuery('.countdown').text(remaining + ' characters. This Hoot is too long!');
      }
     else if (remaining == 1)
      {
-      $('.countdown').css({ 'color': 'black', 'font-size': '100%' });
+      $('.countdown').css({ 'color': 'white', 'font-size': '100%' });
       jQuery('.countdown').text(remaining + ' character remaining.');
      }
     else
      {
-      $('.countdown').css({ 'color': 'black', 'font-size': '100%' });
+      $('.countdown').css({ 'color': 'white', 'font-size': '100%' });
       jQuery('.countdown').text(remaining + ' characters remaining.');
      }
 

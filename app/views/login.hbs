@@ -1,20 +1,19 @@
 {{> welcomemenu }}
 
-<section class="ui raised segment">
    <div class="ui grid">
      <aside class="ui six wide column">
        <img src="images/owl_big_eyes_garden.jpg" class="ui medium image">
      </aside>
      <div class="ui ten wide column fluid form">
-       <div class="ui stacked segment">
+       <div class="ui stacked segment" id="purple">
          <form action="/login" method="POST">
-           <h3 class="ui header">Log-in</h3>
+           <h3 class="ui header" style="color:#ffffff">Log-in</h3>
            <div class="field">
-             <label>Email</label> <input placeholder="Email" type="text"
+             <label style="color:#ffffff">Email</label> <input placeholder="Email" type="text"
                                          name="email">
            </div>
            <div class="field">
-             <label>Password</label> <input type="password" name="password">
+             <label style="color:#ffffff">Password</label> <input type="password" name="password">
            </div>
            <button class="ui blue submit button">Login</button>
          </form>
@@ -22,4 +21,3 @@
        </div>
      </div>
    </div>
-</section>

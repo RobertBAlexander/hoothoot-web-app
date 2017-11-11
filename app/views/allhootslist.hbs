@@ -1,7 +1,6 @@
 {{> mainmenu _id="allhootslist" }}
 
-<section class="ui raised segment">
-<table class="ui fixed table">
+<table class="ui fixed table" id="purple">
   <tbody>
   <div class="ui bulleted list">
     {{#each users}}
@@ -9,7 +8,7 @@
       <td>
         <div class="column">
           <p class="ui wechat icon">
-            <a href="/viewotheruser/{{id}}"><h3><i class="ui blue wechat icon"></i>{{firstName}}
+            <a href="/viewotheruser/{{id}}"><h3><i class="ui teal wechat icon"></i>{{firstName}}
               {{lastName}}</h3></a></p>
         </div>
       </td>
@@ -22,5 +21,3 @@
 
   <div class="ui  divider"></div>
   </div>
-
-</section>

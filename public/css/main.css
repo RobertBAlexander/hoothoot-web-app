@@ -1,0 +1,173 @@
+body
+{
+    font-family: Trebuchet MS, Lucida Grande, Tahoma, sans-serif;
+    /*height: 100%;*/
+    /*color: white;*/
+    background-color: #576e77;/*in case browser doesn't support any of following gradients*/
+    background: -webkit-linear-gradient(#0A0A0A, #003366); /* For compatible Safari browsers */
+    background: -o-linear-gradient(#0A0A0A, #003366); /* For compatible Opera browsers */
+    background: -moz-linear-gradient(#0A0A0A, #003366); /* For compatible Firefox browsers */
+    background: linear-gradient(#0A0A0A, #003366);/*For other browsers not lsited that do support gradients*/
+}
+
+/*This section covers anything that appears in the header only*/
+.sunset
+{
+    background-color: #576e77;/*in case browser doesn't support any of following gradients*/
+    background: -webkit-linear-gradient(#0A0A0A, #003366); /* For compatible Safari browsers */
+    background: -o-linear-gradient(#0A0A0A, #003366); /* For compatible Opera browsers */
+    background: -moz-linear-gradient(#0A0A0A, #003366); /* For compatible Firefox browsers */
+    background: linear-gradient(#0A0A0A, #003366);/*For other browsers not lsited that do support gradients*/
+}
+
+#header
+{
+    background-color: black;
+    background-image:url("../images/KoW-Banner.png");
+    text-shadow: 2px 2px #000000;
+    font-family: Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif;
+    font-size: 1.4em;
+    margin: 2% 6% 0% 6%;
+}
+
+
+#header h1
+{
+    text-align: center;
+}
+
+/*This section covers anything that appears in the navigation
+menus only*/
+
+.navigation
+{
+    float: left;
+    width: 18%;
+    /*height: 90%;*/
+    padding-bottom: 10%;
+    padding-left: 3px;
+    margin-right: 4px;
+}
+
+
+.navigation ul
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation li
+{
+    text-align: center;
+    background-color: #4C6169;
+    border: 6px groove;
+    border-radius: 25px;
+    border-color: #898989;
+    padding: 4px;
+}
+
+.navigation a
+{
+    font-family: Trebuchet MS, Lucida Grande, Tahoma, sans-serif;
+    color: white;
+}
+
+.navigation a:hover
+{
+    color: yellow;
+}
+
+li.current
+{
+    border: 6px solid;
+    border-color: yellow;
+}
+
+/*This section covers anything that appears in an article element
+, and things which are only nested inside article elements*/
+
+section
+{
+    width: 100%;
+    /*height: 100%;*/
+    text-shadow: 2px 2px #000000;
+    background-image:url("../images/Photo-of-Stars.jpg");
+    background-size: 100% 100%;
+    /*background-size: contain;*/
+    background-color: rgba(100%, 0, 0, 1.0);
+    background-opacity: 1;
+    padding: 3%;
+    border: 6px groove;
+    border-color: #898989;
+    border-radius: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#purple
+{
+    background-color: #243164;
+}
+
+#lightpurple
+{
+    background-color: #435f72;
+}
+
+img
+{
+    max-width: 100%;
+    border-radius: 25px;
+}
+
+h2
+{
+    font-size: 2em;
+    text-align: center;
+}
+
+section
+{
+    width: 100%;
+   /* float: left;*/
+}
+
+.article_image
+{
+    width: 20%;
+    float: left;
+    margin-top: 20px;
+}
+
+.opener
+{
+    width: 78%;
+    float: right;
+}
+
+.contact_me
+{
+    background-color: #FFFFFF;
+    background-size: 100%;
+    color: #000000;
+    text-shadow: 1px 1px #1d1d1d;
+    font-size: 1.2em;
+}
+
+summary:hover
+{
+    color: red;
+}
+
+/*This section covers anything that appears in the footer only*/
+
+#footer
+{
+    width: 70%;
+    float: left;
+    font-size: .8em;
+    text-align: center;
+    margin: 10px;
+    margin-left: 20%;
+}

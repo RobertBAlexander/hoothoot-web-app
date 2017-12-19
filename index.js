@@ -3,7 +3,7 @@
 const Hapi = require('hapi');
 
 const server = new Hapi.Server();
-server.connection({ port: process.env.PORT || 5000 });
+server.connection({ port: process.env.PORT || 4000 });
 require('./app/models/db');
 
 server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err => {

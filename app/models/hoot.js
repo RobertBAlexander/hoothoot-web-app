@@ -11,6 +11,7 @@ const hootSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  picture: { data: Buffer, contentType: String },
 });
 
 const Hoot = mongoose.model('Hoot', hootSchema);

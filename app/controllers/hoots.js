@@ -37,16 +37,16 @@ exports.allhootslist = {
 
   handler: function (request, reply) {
     User.find({}).populate('user').then(allUsers => {
-      Hoot.find({}).populate('hooter').sort({ date: 'desc' }).then(allHoots => {
-        reply.view('allhootslist', {
-          title: 'All Hoots to Date',
-          hoots: allHoots,
-          users: allUsers,
-        });
-      }).catch(err => {
-        reply.redirect('/');
-      });
-    });
+            Hoot.find({}).populate('hooter').sort({ date: 'desc' }).then(allHoots => {
+              reply.view('allhootslist', {
+                title: 'All Hoots to Date',
+                hoots: allHoots,
+                users: allUsers,
+              });
+            }).catch(err => {
+              reply.redirect('/');
+            });
+          });
   },
 
 };
@@ -74,6 +74,7 @@ exports.hoot = {
     payload: {
       hootmain: Joi.string().min(3).max(140).required(),
       hashtag: Joi,
+      picture: Joi,
     },
 
     failAction: function (request, reply, source, error) {
@@ -91,12 +92,17 @@ exports.hoot = {
 
   handler: function (request, reply) {
     var userEmail = request.auth.credentials.loggedInUser;
+    let hootPic = request.payload.picture;
     User.findOne({ email: userEmail }).then(user => {
       let data = request.payload;
       const hoot = new Hoot(data);
       const date = new Date().toString().substring(0, 25);
       hoot.hooter = user._id;
       hoot.date = date;
+      if (hootPic.length) {
+        hoot.picture.data = hootPic;
+      }
+
       return hoot.save();
     }).then(newHoot => {
       reply.redirect('/report');
@@ -133,6 +139,19 @@ exports.deleteallhoots = {
       }).catch(err => {
         reply.redirect('/report');
       });
+    });
+  },
+};
+
+exports.getPic = {
+  handler: function (request, reply)
+  {
+    let hootId = request.params.id;
+    Hoot.findOne({ _id: hootId }).exec((err, hoot) => {
+      if (hoot.picture.data)
+      {
+        reply(hoot.picture.data).type('image');
+      }
     });
   },
 };

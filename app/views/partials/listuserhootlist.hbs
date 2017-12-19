@@ -5,18 +5,18 @@
     <article class="eight wide column">
       <form class="ui form"  action="/deletelistuserhoot/{{id}}" method="POST">
         {{#each hoots}}
-          <table class="ui celled table segment">
+          <table class="ui celled table segment" style="color:#ffffff">
 
             <thead>
             <tr>
-              <th id="lightpurple">{{hooter.firstName}} {{hooter.lastName}} says:</th>
-              <th id="lightpurple">                <div class="ui checkbox">
+              <th id="lightpurple" style="color:#ffffff">{{hooter.firstName}} {{hooter.lastName}} says:</th>
+              <th id="lightpurple" style="color:#ffffff">                <div class="ui checkbox">
                 <input name="{{_id}}" type="checkbox">
-                <label>Delete</label>
+                <label style="color:#ffffff">Delete</label>
               </div></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="purple">
 
             <tr>
               <td><div style="height: 100px; width: 200px;">{{hootmain}}</div>  </td>

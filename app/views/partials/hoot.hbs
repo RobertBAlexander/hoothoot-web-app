@@ -3,7 +3,7 @@
     <!--<div class ="sunset">-->
     <div class="ui form six wide column">
       <div class="ui segment " id="purple" >
-        <form action="/hoot" method="POST" style="color:#ffffff">
+        <form action="/hoot" method="POST" style="color:#ffffff" enctype="multipart/form-data">
           <div class="ui dropdown" name="hashtag">
             <input type="hidden" name="hashtag">
             <div class="text">What Hashtag?</div>
@@ -19,6 +19,10 @@
           <label>Hoot:</label> <textarea class="hootmain" placeholder="Orly?" type="text" name="hootmain" rows="3" cols="30"></textarea>
           <br>
           <span class="countdown"></span>
+          <br>
+          <br>
+          <input type="file" name="picture">
+          <br>
           <br>
           <button class="ui teal submit button">Toot your Hoot</button>
         </form>

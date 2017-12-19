@@ -8,6 +8,13 @@ const Administrate = require('./app/controllers/administrate');
 
 module.exports = [
 
+/*  {
+    method: 'GET', path: '/welcome/{lastName}',
+    handler: function (request, reply) {
+      reply('Welcome ' + request.params.lastName + '!  Go <a href="/login">here</a> to log in.');
+    },
+  },*/
+
   { method: 'GET', path: '/', config: Accounts.main },
   { method: 'GET', path: '/signup', config: Accounts.signup },
   { method: 'GET', path: '/login', config: Accounts.login },
@@ -23,6 +30,7 @@ module.exports = [
   { method: 'GET', path: '/viewotheruser/{id}', config: Hoots.viewotheruser },
 
   { method: 'POST', path: '/hoot', config: Hoots.hoot },
+  { method: 'GET', path: '/getPic/{id}', config: Hoots.getPic },
   { method: 'POST', path: '/deletehoot', config: Hoots.deletehoot },
   { method: 'POST', path: '/deleteallhoots', config: Hoots.deleteallhoots },
 

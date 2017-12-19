@@ -144,7 +144,7 @@ exports.updateSettings = {
 
     payload: {
       firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
+      lastName: Joi.string().regex(/^[A-Z]{1,3}[']?[a-zA-Z]{3,14}[-]?[A-Z]{0,3}[']?[a-zA-Z]{0,14}$/).required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
     },
@@ -154,8 +154,8 @@ exports.updateSettings = {
     },
 
     failAction: function (request, reply, source, error) {
-      reply.view('signup', {
-        title: 'Sign up error',
+      reply.view('settings', {
+        title: 'Update error',
         errors: error.data.details,
       }).code(400);
     },
@@ -178,3 +178,4 @@ exports.updateSettings = {
     });
   },
 };
+

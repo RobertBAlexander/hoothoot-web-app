@@ -179,3 +179,20 @@ exports.updateSettings = {
   },
 };
 
+exports.followuser = {
+  handler: function (request, reply) {
+    let loggedInUser = request.auth.credentials.loggedInUser;
+    const userId = '5a1b23b24854730b208559ee';
+    User.findOne({ email: loggedInUser }).then(currentUser => {
+      User.findOne({ _id: userId }).then(foundUser => {
+        currentUser.following.push(foundUser._id);
+        foundUser.followers.push(currentUser._id);
+        currentUser.save();
+        foundUser.save();
+        reply.redirect('/allhootslist');
+      });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+};

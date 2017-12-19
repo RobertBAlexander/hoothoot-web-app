@@ -9,7 +9,10 @@
         <div class="column">
           <p class="ui wechat icon">
             <a href="/viewotheruser/{{id}}"><h3><i class="ui teal wechat icon"></i>{{firstName}}
-              {{lastName}}</h3></a></p>
+              {{lastName}}</h3></a>
+              {{#if followers}}<a href="/followuser/{{id}}"><i class="ui red plus icon"></i></a>
+              {{else}}<i class="ui blue minus icon"></i></a>{{/if}}
+          </p>
         </div>
       </td>
     {{/each}}

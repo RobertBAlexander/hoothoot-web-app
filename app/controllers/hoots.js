@@ -19,10 +19,15 @@ exports.report = {
 
   handler: function (request, reply) {
     const userEmail = request.auth.credentials.loggedInUser;
+
     User.findOne({ email: userEmail }).then(currentUser => {
+      const followers = currentUser.followers.length;
+      const following = currentUser.following.length;
       Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' }).then(hootList => {
         reply.view('report', {
           title: 'Hoots to Date',
+          followers: followers,
+          following: following,
           hoots: hootList,
         });
       }).catch(err => {
@@ -36,16 +41,20 @@ exports.report = {
 exports.allhootslist = {
 
   handler: function (request, reply) {
+    //var userEmail = request.auth.credentials.loggedInUser;
     User.find({}).populate('user').then(allUsers => {
+            //if (allUsers.followers._id == userEmail.id)
+      const follow = 1;
             Hoot.find({}).populate('hooter').sort({ date: 'desc' }).then(allHoots => {
-              reply.view('allhootslist', {
-                title: 'All Hoots to Date',
-                hoots: allHoots,
-                users: allUsers,
-              });
-            }).catch(err => {
-              reply.redirect('/');
-            });
+                    reply.view('allhootslist', {
+                      title: 'All Hoots to Date',
+                      hoots: allHoots,
+                      users: allUsers,
+                      follow: follow,
+                    });
+                  }).catch(err => {
+                    reply.redirect('/');
+                  });
           });
   },
 
@@ -91,7 +100,7 @@ exports.hoot = {
   },
 
   handler: function (request, reply) {
-    var userEmail = request.auth.credentials.loggedInUser;
+    let userEmail = request.auth.credentials.loggedInUser;
     let hootPic = request.payload.picture;
     User.findOne({ email: userEmail }).then(user => {
       let data = request.payload;

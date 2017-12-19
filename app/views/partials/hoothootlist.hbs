@@ -3,6 +3,9 @@
     <aside class="six wide column">
       <img src="images/owl_and_cat.jpg" class="ui medium image">
     </aside>
+      <p>You have {{followers}} followers,<br>
+        and you are following {{following}} people.</p>
+
     <article class="eight wide column">
       {{#if hoots}}
         <form class="ui form" action="/deletehoot" method="POST">

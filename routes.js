@@ -24,6 +24,8 @@ module.exports = [
   { method: 'GET', path: '/settings', config: Accounts.viewSettings },
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
+  { method: 'GET', path: '/followuser/{id}', config: Accounts.followuser },
+
   { method: 'GET', path: '/home', config: Hoots.home },
   { method: 'GET', path: '/report', config: Hoots.report },
   { method: 'GET', path: '/allhootslist', config: Hoots.allhootslist },

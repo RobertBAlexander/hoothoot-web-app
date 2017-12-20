@@ -5,6 +5,7 @@ const Accounts = require('./app/controllers/accounts');
 const Hoots = require('./app/controllers/hoots');
 const Assets = require('./app/controllers/assets');
 const Administrate = require('./app/controllers/administrate');
+const Temporary = require('./app/controllers/temporary')
 
 module.exports = [
 
@@ -25,8 +26,9 @@ module.exports = [
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
   { method: 'GET', path: '/followuser/{id}', config: Accounts.followuser },
+  { method: 'GET', path: '/unfollowuser/{id}', config: Accounts.unfollowuser },
 
-  { method: 'GET', path: '/home', config: Hoots.home },
+  { method: 'GET', path: '/home', config: Temporary.home },
   { method: 'GET', path: '/report', config: Hoots.report },
   { method: 'GET', path: '/allhootslist', config: Hoots.allhootslist },
   { method: 'GET', path: '/viewotheruser/{id}', config: Hoots.viewotheruser },

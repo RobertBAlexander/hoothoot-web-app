@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
   password: String,
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  isFollowed: Boolean,
 });
 
 const User = mongoose.model('User', userSchema);

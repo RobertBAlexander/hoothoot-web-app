@@ -11,9 +11,31 @@ exports.adminhome = {
 
   handler: function (request, reply) {
     User.find({}).populate('user').then(allUsers => {
-      reply.view('adminhome', {
-        title: 'Users to Date',
-        users: allUsers,
+      const totalUsers = allUsers.length;
+      Hoot.find({}).populate('hoot').then(allHoots => {
+        const totalHoots = allHoots.length;
+        const averageHoots = Math.round(totalHoots / totalUsers);
+        let totalFollowers = 0;
+
+        for (let i = 0; i < allUsers.length; i++)
+        {
+          totalFollowers = totalFollowers + allUsers[i].followers.length;
+          console.log('user' + allUsers[i].firstName);
+        }
+
+        const allFollowers = allUsers[2].followers.length;
+        const averageFollow = Math.round(totalFollowers / allUsers.length);
+        //const allFollowers = totalFollowers;
+
+        reply.view('adminhome', {
+          title: 'Users to Date',
+          users: allUsers,
+          totalUsers: totalUsers,
+          totalHoots: totalHoots,
+          averageHoots: averageHoots,
+          //allFollowers: allFollowers,
+          averageFollow: averageFollow,
+        });
       });
     }).catch(err => {
       reply.redirect('/');

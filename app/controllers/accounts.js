@@ -32,6 +32,7 @@ exports.register = {
       lastName: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      //isFollowed: Joi.string('true'),
     },
 
     failAction: function (request, reply, source, error) {
@@ -182,11 +183,29 @@ exports.updateSettings = {
 exports.followuser = {
   handler: function (request, reply) {
     let loggedInUser = request.auth.credentials.loggedInUser;
-    const userId = '5a1b23b24854730b208559ee';
+    const userId = request.params.id;
     User.findOne({ email: loggedInUser }).then(currentUser => {
       User.findOne({ _id: userId }).then(foundUser => {
         currentUser.following.push(foundUser._id);
         foundUser.followers.push(currentUser._id);
+        currentUser.save();
+        foundUser.save();
+        reply.redirect('/allhootslist');
+      });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+};
+
+exports.unfollowuser = {
+  handler: function (request, reply) {
+    let loggedInUser = request.auth.credentials.loggedInUser;
+    const userId = request.params.id;
+    User.findOne({ email: loggedInUser }).then(currentUser => {
+      User.findOne({ _id: userId }).then(foundUser => {
+        currentUser.following.splice(foundUser._id, 1);
+        foundUser.followers.splice(currentUser._id, 1);
         currentUser.save();
         foundUser.save();
         reply.redirect('/allhootslist');

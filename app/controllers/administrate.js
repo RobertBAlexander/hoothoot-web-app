@@ -76,11 +76,14 @@ exports.newuser = {
   },
   handler: function (request, reply) {
     const user = new User(request.payload);
-
-    user.save().then(newUser => {
-      reply.redirect('/adminhome');
-    }).catch(err => {
-      reply.redirect('/');
+    const plaintextPassword = user.password;
+    bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+      user.password = hash;
+      return user.save().then(newUser => {
+        reply.redirect('/adminhome');
+      }).catch(err => {
+        reply.redirect('/');
+      });
     });
   },
 

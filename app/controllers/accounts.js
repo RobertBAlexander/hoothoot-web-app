@@ -5,6 +5,8 @@
 const User = require('../models/user');
 const Joi = require('joi');
 const uuid = require('uuid');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.main = {
   auth: false,
@@ -51,11 +53,15 @@ exports.register = {
   handler: function (request, reply) {
     let data = request.payload;
     const user = new User(data);
+    const plaintextPassword = user.password;
 
-    user.save().then(newUser => {
-      reply.redirect('/login');
-    }).catch(err => {
-      reply.redirect('/');
+    bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+      user.password = hash;
+      return user.save().then(newUser => {
+        reply.redirect('/login');
+      }).catch(err => {
+        reply.redirect('/');
+      });
     });
   },
 
@@ -102,21 +108,22 @@ exports.authenticate = {
       reply.redirect('/adminhome');
     } else {
       User.findOne({ email: user.email }).then(foundUser => {
-        if (foundUser && foundUser.password === user.password) {
-          request.cookieAuth.set({
-            loggedIn: true,
-            loggedInUser: user.email,
-          });
-          reply.redirect('/home');
-        } else {
-          reply.redirect('/signup');
-        }
+        bcrypt.compare(user.password, foundUser.password, function (err, isValid) {
+          if (isValid) {
+            request.cookieAuth.set({
+              loggedIn: true,
+              loggedInUser: user.email,
+            });
+            reply.redirect('/home');
+          } else {
+            reply.redirect('/signup');
+          }
+        });
       }).catch(err => {
         reply.redirect('/');
       });
     }
   },
-
 };
 
 exports.logout = {
@@ -147,7 +154,7 @@ exports.updateSettings = {
       firstName: Joi.string().required(),
       lastName: Joi.string().regex(/^[A-Z]{1,3}[']?[a-zA-Z]{3,14}[-]?[A-Z]{0,3}[']?[a-zA-Z]{0,14}$/).required(),
       email: Joi.string().email().required(),
-      password: Joi.string().required(),
+      password: Joi.string(),
     },
 
     options: {
@@ -170,8 +177,12 @@ exports.updateSettings = {
       user.firstName = editedUser.firstName;
       user.lastName = editedUser.lastName;
       user.email = editedUser.email;
-      user.password = editedUser.password;
-      return user.save();
+      //user.password = editedUser.password;
+      bcrypt.hash(editedUser.password, saltRounds, function (err, hash) {
+        user.password = hash;
+        user.save();
+      });
+      return user;
     }).then(user => {
       reply.view('settings', { title: 'Edit Account Settings', user: user });
     }).catch(err => {

@@ -7,7 +7,7 @@ suite('User API tests', function () {
 
   test('get users', function () {
 
-    const url = 'http://LAPTOP-86GRCAUF:5000/api/users';
+    const url = 'http://localhost:4000';
     var res = request('GET', url);
     const users = JSON.parse(res.getBody('utf8'));
     assert.equal(3, users.length);
@@ -31,7 +31,7 @@ suite('User API tests', function () {
 
   test('get one user', function () {
 
-    const allUsersUrl = 'http://LAPTOP-86GRCAUF:5000/api/users';
+    const allUsersUrl = 'http://localhost:4000';
     var res = request('GET', allUsersUrl);
     const users = JSON.parse(res.getBody('utf8'));
 

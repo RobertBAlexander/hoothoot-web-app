@@ -5,19 +5,19 @@
       "firstName": "Homer",
       "lastName": "Simpson",
       "email": "homer@simpson.com",
-      "password": "secret"
+      "password": "$2a$10$6VY8KYTyoaVyKSRiorUwxucMOsFMW/Oufbkn6tkvCPbxAvEEOsfIK"
     },
     "marge": {
       "firstName": "Marge",
       "lastName": "Simpson",
       "email": "marge@simpson.com",
-      "password": "secret"
+      "password": "$2a$10$tY5cvSbAhkcPcoJbxVYdNeX4HoJgyMnPC3Cx1rr2STBSDlP9oh2WS"
     },
     "bart": {
       "firstName": "Bart",
       "lastName": "Simpson",
       "email": "bart@simpson.com",
-      "password": "secret"
+      "password": "$2a$10$PiySl7dz/6VZ.7dxe/YAoOCPfoX3jRVSF101VTcczHcYRP59MMVZG"
     }
   },
   "hoots": {
@@ -25,16 +25,19 @@
     "one": {
       "hashtag": "Hoot Topic",
       "hootmain": "This is nice",
+      "date": "4:41 PM - 10th Nov 17",
       "hooter": "->users.bart"
     },
     "two": {
       "hashtag": "Night snack",
       "hootmain": "Testing my hoots",
+      "date": "4:41 PM - 10th Nov 17",
       "hooter": "->users.marge"
     },
     "three": {
       "hashtag": "Owlcoholic",
       "hootmain": "I love hooting",
+      "date": "4:41 PM - 10th Nov 17",
       "hooter": "->users.homer"
     }
   }

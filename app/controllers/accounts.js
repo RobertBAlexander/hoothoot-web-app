@@ -3,14 +3,10 @@
  */
 'use strict';
 const User = require('../models/user');
-const Hoot = require('../models/hoot');
 const Joi = require('joi');
 const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-/*const jwt = require('jsonwebtoken');
-var jws = require('jws');
-const jwtDecode = require('jwt-decode');*/
 
 exports.main = {
   auth: false,
@@ -140,11 +136,9 @@ exports.logout = {
 };
 
 exports.viewSettings = {
-  auth: false,
+
   handler: function (request, reply) {
-    const userEmail = request.auth.credentials.loggedInUser;
-    //const cryptUserEmail = request.auth.credentials.loggedInUser;
-    //let  userEmail = jwt_decode(cryptUserEmail);
+    var userEmail = request.auth.credentials.loggedInUser;
     User.findOne({ email: userEmail }).then(foundUser => {
       reply.view('settings', { title: 'View and change your details', user: foundUser });
     }).catch(err => {
@@ -154,14 +148,11 @@ exports.viewSettings = {
 };
 
 exports.updateSettings = {
-  auth: false,
   validate: {
 
     payload: {
       firstName: Joi.string().required(),
-      lastName: Joi.string().regex(/^[A-Z]{1,3}[']?[a-zA-Z]{3,14}[-]?[A-Z]{0,3}[']?[a-zA-Z]{0,14}$/)
-          .required(), //allows double barreled names, and Irish names like O'Grady, but disallows
-      //other sybmols, and disallows many combinations with allowed symbols.
+      lastName: Joi.string().regex(/^[A-Z]{1,3}[']?[a-zA-Z]{3,14}[-]?[A-Z]{0,3}[']?[a-zA-Z]{0,14}$/).required(),
       email: Joi.string().email().required(),
       password: Joi.string(),
     },

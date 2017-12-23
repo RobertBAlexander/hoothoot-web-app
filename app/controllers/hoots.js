@@ -8,7 +8,7 @@ const User = require('../models/user');
 const Joi = require('joi');
 
 exports.home = {
-
+  auth: false,
   handler: (request, reply) => {
     reply.view('home', { title: 'Welcome to Hoot Hoots' });
   },
@@ -16,14 +16,15 @@ exports.home = {
 };
 
 exports.report = {
-
+  auth: false,
   handler: function (request, reply) {
-    const userEmail = request.auth.credentials.loggedInUser;
+    let userEmail = request.auth.credentials.loggedInUser;
 
     User.findOne({ email: userEmail }).then(currentUser => {
       const followers = currentUser.followers.length;
       const following = currentUser.following.length;
-      Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' }).then(hootList => {
+      Hoot.find({ hooter: currentUser._id }).populate('hooter')
+          .sort({ date: 'desc' }).then(hootList => {
         reply.view('report', {
           title: 'Hoots to Date',
           followers: followers,
@@ -39,12 +40,12 @@ exports.report = {
 };
 
 exports.allhootslist = {
-
+  auth: false,
   handler: function (request, reply) {
     //var userEmail = request.auth.credentials.loggedInUser;
     User.find({}).populate('user').then(allUsers => {
             //if (allUsers.followers._id == userEmail.id)
-      const follow = 1;
+            const follow = 1;
             Hoot.find({}).populate('hooter').sort({ date: 'desc' }).then(allHoots => {
                     reply.view('allhootslist', {
                       title: 'All Hoots to Date',
@@ -61,7 +62,7 @@ exports.allhootslist = {
 };
 
 exports.viewotheruser = {
-
+  auth: false,
   handler: function (request, reply) {
     const userId = request.params.id;
     Hoot.find({ hooter: userId }).populate('hooter').sort({ date: 'desc' }).then(userHoots => {
@@ -77,7 +78,7 @@ exports.viewotheruser = {
 };
 
 exports.hoot = {
-
+  auth: false,
   validate: {
 
     payload: {
@@ -108,7 +109,7 @@ exports.hoot = {
       const date = new Date().toString().substring(0, 25);
       hoot.hooter = user._id;
       hoot.date = date;
-      if (hootPic.length) {
+      if (hootPic) {//hootPic.length
         hoot.picture.data = hootPic;
       }
 

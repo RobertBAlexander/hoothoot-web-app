@@ -7,6 +7,24 @@ class SyncHttpService {
     this.authHeadder = null;
   }
 
+  setAuth(url, user) {
+    const res = request('POST', this.baseUrl + url, { json: user });
+    if (res.statusCode == 201) {
+      var payload = JSON.parse(res.getBody('utf8'));
+      if (payload.success) {
+        this.authHeadder = { Authorization: 'bearer ' + payload.token, };
+        return true;
+      }
+    }
+
+    this.authHeadder = null;
+    return false;
+  }
+
+  clearAuth() {
+    this.authHeadder = null;
+  }
+
   get(url) {
     let returnedObj = null;
     let res = request('GET', this.baseUrl + url, { headers: this.authHeadder });

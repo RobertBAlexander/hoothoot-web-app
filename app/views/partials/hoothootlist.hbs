@@ -28,6 +28,11 @@
               <tr>
                 <td>
                   <div style="height: 100px; width: 200px;">{{hootmain}}</div>
+                  {{#if picture.data}}
+                    <div class="image">
+                      <img src="/getPic/{{_id}}"  height="150" width="150"/>
+                    </div>
+                  {{/if}}
                 </td>
                 <td>{{#if hashtag}}#{{/if}}{{hashtag}} <br><br><br><br> {{date}} </td>
               </tr>

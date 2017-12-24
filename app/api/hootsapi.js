@@ -24,12 +24,15 @@ exports.findOne = {
 
   handler: function (request, reply) {
     Hoot.findOne({ _id: request.params.id }).then(hoot => {
-      reply(hoot);
+      if (hoot != null) {
+        reply(hoot);
+      } else {
+        reply(Boom.notFound('id not found'));
+      }
     }).catch(err => {
       reply(Boom.notFound('id not found'));
     });
   },
-
 };
 
 exports.create = {

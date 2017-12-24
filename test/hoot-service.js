@@ -49,6 +49,10 @@ class HootService {
     return this.httpService.delete('/api/users/' + id);
   }
 
+  authenticate(user) {
+    return this.httpService.post('/api/users/authenticate', user);
+  }
+
 }
 
 module.exports = HootService;

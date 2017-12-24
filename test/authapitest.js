@@ -1,5 +1,7 @@
 'use strict';
 
+//Test no longer used do to change in authorisation.
+//File kept in case of reimplimentation on future date.
 const assert = require('chai').assert;
 const HootService = require('./hoot-service');
 const fixtures = require('./fixtures.json');

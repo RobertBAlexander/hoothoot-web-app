@@ -11,6 +11,7 @@ module.exports = [
   { method: 'POST', path: '/api/users', config: UsersApi.create },
   { method: 'DELETE', path: '/api/users/{id}', config: UsersApi.deleteOne },
   { method: 'DELETE', path: '/api/users', config: UsersApi.deleteAll },
+  { method: 'POST', path: '/api/users/authenticate', config: UsersApi.authenticate },
 
   { method: 'GET', path: '/api/hoots', config: HootsApi.find },
   { method: 'GET', path: '/api/hoots/{id}', config: HootsApi.findOne },

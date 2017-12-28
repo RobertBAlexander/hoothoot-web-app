@@ -16,6 +16,10 @@ mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
   console.log('Mongoose connected to ' + dbURI);
+});
+
+/*mongoose.connection.on('connected', function () {
+  console.log('Mongoose connected to ' + dbURI);
   if (process.env.NODE_ENV != 'production') {
     var seeder = require('mongoose-seeder');
     const data = require('./data.json');
@@ -28,7 +32,7 @@ mongoose.connection.on('connected', function () {
       console.log(error);
     });
   }
-});
+});*/
 
 mongoose.connection.on('error', function (err) {
   console.log('Mongoose connection error: ' + err);

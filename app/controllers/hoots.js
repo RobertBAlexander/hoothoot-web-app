@@ -27,8 +27,10 @@ exports.report = {
           {
             if (followedUsers.length > 0) {
               for (let j = 0; j < followedUsers.length; j++) {
+                console.log('Following: ' + followedUsers[j].firstName);
+                followedUsers[j].isFollowed = true;
                 //console.log(allUsers[i].firstName);
-                for (let k = 0; k < followedUsers[j].followers.length; k++) {
+                /*for (let k = 0; k < followedUsers[j].followers.length; k++) {
                   if (allUsers[i]._id == followedUsers[j].followers) {
                     console.log('following user: ' + allUsers[i].firstName);
                     allUsers[i].isFollowed = true;
@@ -36,7 +38,7 @@ exports.report = {
                     console.log('not following user: ' + allUsers[i].firstName + followedUsers[j].followers);
                     //allUsers[i].isFollowed = false;
                   }
-                }
+                }*/
               }
             } else
             {

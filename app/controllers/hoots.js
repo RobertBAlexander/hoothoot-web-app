@@ -26,19 +26,21 @@ exports.report = {
           for (let i = 0; i < allUsers.length; i++)
           {
             if (followedUsers.length > 0) {
-              for (let j = 0; j <= followedUsers.length; j++) {
+              for (let j = 0; j < followedUsers.length; j++) {
                 //console.log(allUsers[i].firstName);
-                if (allUsers[i]._id == followedUsers[j].id) {
-                  console.log('following user' + allUsers[i].firstName);
-                  allUsers[i].isFollowed = true;
-                } else {
-                  console.log('not following user' + allUsers[i].firstName);
-                  allUsers[i].isFollowed = false;
+                for (let k = 0; k < followedUsers[j].followers.length; k++) {
+                  if (allUsers[i]._id == followedUsers[j].followers) {
+                    console.log('following user: ' + allUsers[i].firstName);
+                    allUsers[i].isFollowed = true;
+                  } else {
+                    console.log('not following user: ' + allUsers[i].firstName + followedUsers[j].followers);
+                    //allUsers[i].isFollowed = false;
+                  }
                 }
               }
             } else
             {
-              console.log('not following user' + allUsers[i].firstName);
+              console.log('not following user ' + allUsers[i].firstName);
               allUsers[i].isFollowed = false;
             }
           }

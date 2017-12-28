@@ -12,8 +12,8 @@
               <tr>
                 <th id="lightpurple" style="color:#ffffff"><!--{{#if followers}}<a href="/followuser/{{id}}"><i class="ui blue plus icon"></i></a>
                 {{else}}<i class="ui red minus icon"></i></a>{{/if}}-->
-                  <a href="/followuser/{{hooter.id}}"><i class="large add user icon"></i></a>
-                  <a href="/unfollowuser/{{hooter.id}}"><i class="large red remove user icon"></i></a>
+                  {{#if isFollowed}}<a href="/unfollowuser/{{hooter.id}}"><i class="large red remove user icon"></i></a>
+                  {{else}}<a href="/followuser/{{hooter.id}}"><i class="large add user icon"></i></a>{{/if}}
                   {{hooter.firstName}} {{hooter.lastName}} says:</th>
                 <th id="lightpurple" style="color:#ffffff"></th>
               </tr>

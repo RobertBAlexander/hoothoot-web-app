@@ -199,6 +199,7 @@ exports.followuser = {
       User.findOne({ _id: userId }).then(foundUser => {
         currentUser.following.push(foundUser._id);
         foundUser.followers.push(currentUser._id);
+        foundUser.isFollowed = true;
         currentUser.save();
         foundUser.save();
         reply.redirect('/allhootslist');
@@ -217,6 +218,7 @@ exports.unfollowuser = {
       User.findOne({ _id: userId }).then(foundUser => {
         currentUser.following.splice(foundUser._id, 1);
         foundUser.followers.splice(currentUser._id, 1);
+        foundUser.isFollowed = false;
         currentUser.save();
         foundUser.save();
         reply.redirect('/allhootslist');

@@ -114,7 +114,7 @@ exports.authenticate = {
               loggedIn: true,
               loggedInUser: user.email,
             });
-            reply.redirect('/home');
+            reply.redirect('/report');
           } else {
             reply.redirect('/signup');
           }

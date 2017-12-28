@@ -8,6 +8,8 @@
       <td>
         <div class="column">
           <p class="ui wechat icon">
+          {{#if isFollowed}}<a href="/unfollowuser/{{id}}"><i class="large red remove user icon"></i></a>
+          {{else}}<a href="/followuser/{{id}}"><i class="large add user icon"></i></a>{{/if}}
             <a href="/viewotheruser/{{id}}"><h3><i class="ui teal wechat icon"></i>{{firstName}}
               {{lastName}}</h3></a>
           </p>

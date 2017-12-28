@@ -1,2 +1,5 @@
 {{> mainmenu _id="none"}}
+{{#if ../followedUsers.isFollowed}}<a href="/unfollowuser/{{hooter.id}}"><i class="large red remove user icon"></i></a>
+{{else}}<a href="/followuser/{{hooter.id}}"><i class="large add user icon"></i></a>{{/if}}
+{{hooter.firstName}} {{hooter.lastName}}
 {{> fullhootslist }}

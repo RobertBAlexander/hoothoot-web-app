@@ -36,9 +36,9 @@ suite('User API tests', function () {
       assert.equal(users[1].email, 'marge@simpson.com');
       assert.equal(users[1].password, 'secret');
 
-      assert.equal(users[2].firstName, 'Bart');
+      assert.equal(users[2].firstName, 'Lisa');
       assert.equal(users[2].lastName, 'Simpson');
-      assert.equal(users[2].email, 'bart@simpson.com');
+      assert.equal(users[2].email, 'lisa@simpson.com');
       assert.equal(users[2].password, 'secret');
 
     });

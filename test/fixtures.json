@@ -14,9 +14,9 @@
       "password": "secret"
     },
     {
-      "firstName": "Bart",
+      "firstName": "Lisa",
       "lastName": "Simpson",
-      "email": "bart@simpson.com",
+      "email": "lisa@simpson.com",
       "password": "secret"
     }
   ],

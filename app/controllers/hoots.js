@@ -21,17 +21,41 @@ exports.report = {
     const userEmail = request.auth.credentials.loggedInUser;
 
     User.findOne({ email: userEmail }).then(currentUser => {
-      const followers = currentUser.followers.length;
-      const following = currentUser.following.length;
-      Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' }).then(hootList => {
-        reply.view('report', {
-          title: 'Hoots to Date',
-          followers: followers,
-          following: following,
-          hoots: hootList,
+      User.find({}).then(allUsers => {
+        User.find({ _id: currentUser.following }).then(followedUsers => {
+          for (let i = 0; i < allUsers.length; i++)
+          {
+            if (followedUsers.length > 0) {
+              for (let j = 0; j <= followedUsers.length; j++) {
+                //console.log(allUsers[i].firstName);
+                if (allUsers[i]._id == followedUsers[j].id) {
+                  console.log('following user' + allUsers[i].firstName);
+                  allUsers[i].isFollowed = true;
+                } else {
+                  console.log('not following user' + allUsers[i].firstName);
+                  allUsers[i].isFollowed = false;
+                }
+              }
+            } else
+            {
+              console.log('not following user' + allUsers[i].firstName);
+              allUsers[i].isFollowed = false;
+            }
+          }
+
+          const followers = currentUser.followers.length;
+          const following = currentUser.following.length;
+          Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' }).then(hootList => {
+            reply.view('report', {
+              title: 'Hoots to Date',
+              followers: followers,
+              following: following,
+              hoots: hootList,
+            });
+          }).catch(err => {
+            reply.redirect('/');
+          });
         });
-      }).catch(err => {
-        reply.redirect('/');
       });
     });
   },
@@ -44,7 +68,7 @@ exports.allhootslist = {
     //var userEmail = request.auth.credentials.loggedInUser;
     User.find({}).populate('user').then(allUsers => {
             //if (allUsers.followers._id == userEmail.id)
-      const follow = 1;
+            const follow = 1;
             Hoot.find({}).populate('hooter').sort({ date: 'desc' }).then(allHoots => {
                     reply.view('allhootslist', {
                       title: 'All Hoots to Date',

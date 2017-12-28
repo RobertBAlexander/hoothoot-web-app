@@ -60,6 +60,7 @@ exports.newuser = {
       lastName: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      isFollowed: Joi.boolean(),
     },
 
     failAction: function (request, reply, source, error) {

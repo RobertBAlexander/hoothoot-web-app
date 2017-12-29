@@ -1,8 +1,9 @@
 /**
- * Created by roberRobert Alexander
+ * Created by Robert Alexander
  **/
 const Hoot = require('../models/hoot');
 const Boom = require('boom');
+const utils = require('./utils.js');
 
 exports.find = {
 

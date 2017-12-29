@@ -3,6 +3,7 @@
  */
 const User = require('../models/user');
 const Boom = require('boom');
+const utils = require('./utils.js');
 
 exports.find = {
 
@@ -79,7 +80,9 @@ exports.deleteOne = {
 };
 
 exports.authenticate = {
+
   auth: false,
+
   handler: function (request, reply) {
     const user = request.payload;
     User.findOne({ email: user.email }).then(foundUser => {

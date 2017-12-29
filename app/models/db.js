@@ -14,10 +14,12 @@ if (process.env.NODE_ENV === 'production') {
 
 mongoose.connect(dbURI);
 
+//comment out when using fixed data
 mongoose.connection.on('connected', function () {
   console.log('Mongoose connected to ' + dbURI);
 });
 
+//comment out when using persisting data
 /*mongoose.connection.on('connected', function () {
   console.log('Mongoose connected to ' + dbURI);
   if (process.env.NODE_ENV != 'production') {

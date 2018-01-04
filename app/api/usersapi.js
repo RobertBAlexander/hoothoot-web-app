@@ -98,3 +98,46 @@ exports.authenticate = {
   },
 
 };
+
+
+exports.followuser = {
+  auth: false,
+
+  handler: function (request, reply) {
+    let loggedInUser = request.auth.credentials.loggedInUser;
+    const userId = request.params.id;
+    User.findOne({ email: loggedInUser }).then(currentUser => {
+      User.findOne({ _id: userId }).then(foundUser => {
+        currentUser.following.push(foundUser._id);
+        foundUser.followers.push(currentUser._id);
+        foundUser.isFollowed = true;
+        currentUser.save();
+        foundUser.save();
+        reply.redirect('/allhootslist');
+      });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+};
+
+exports.unfollowuser = {
+  auth: false,
+
+  handler: function (request, reply) {
+    let loggedInUser = request.auth.credentials.loggedInUser;
+    const userId = request.params.id;
+    User.findOne({ email: loggedInUser }).then(currentUser => {
+      User.findOne({ _id: userId }).then(foundUser => {
+        currentUser.following.splice(foundUser._id, 1);
+        foundUser.followers.splice(currentUser._id, 1);
+        foundUser.isFollowed = false;
+        currentUser.save();
+        foundUser.save();
+        reply.redirect('/allhootslist');
+      });
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+};

@@ -21,9 +21,9 @@ exports.report = {
     const userEmail = request.auth.credentials.loggedInUser;
 
     User.findOne({ email: userEmail }).then(currentUser => {
-      User.find({}).then(allUsers => {
+      User.find({ email: { $ne: [userEmail] } }).populate('user').then(allOtherUsers => {
         User.find({ _id: currentUser.following }).then(followedUsers => {
-          for (let i = 0; i < allUsers.length; i++)
+          for (let i = 0; i < allOtherUsers.length; i++)
           {
             if (followedUsers.length > 0) {
               for (let j = 0; j < followedUsers.length; j++) {
@@ -42,8 +42,8 @@ exports.report = {
               }
             } else
             {
-              console.log('not following user ' + allUsers[i].firstName);
-              allUsers[i].isFollowed = false;
+              console.log('not following user ' + allOtherUsers[i].firstName);
+              allOtherUsers[i].isFollowed = false;
             }
           }
 

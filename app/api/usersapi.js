@@ -99,8 +99,7 @@ exports.authenticate = {
 
 };
 
-
-exports.followuser = {
+exports.follow = {
   auth: false,
 
   handler: function (request, reply) {
@@ -112,8 +111,8 @@ exports.followuser = {
         currentUser.following.push(foundUser._id);
         foundUser.followers.push(currentUser._id);
         foundUser.isFollowed = true;
-        currentUser.save();
-        foundUser.save().then(User => {
+        foundUser.save();
+        currentUser.save().then(User => {
           reply(User).code(201);
         });
       });
@@ -123,7 +122,7 @@ exports.followuser = {
   },
 };
 
-exports.unfollowuser = {
+exports.unfollow = {
   auth: false,
 
   handler: function (request, reply) {

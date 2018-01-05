@@ -4,6 +4,8 @@
 const User = require('../models/user');
 const Boom = require('boom');
 const utils = require('./utils.js');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.find = {
 
@@ -42,10 +44,13 @@ exports.create = {
 
   handler: function (request, reply) {
     const user = new User(request.payload);
-    user.save().then(newUser => {
-      reply(newUser).code(201);
-    }).catch(err => {
-      reply(Boom.badImplementation('error creating user'));
+    bcrypt.hash(user.password, saltRounds, function (err, hash) {
+      user.password = hash;
+      user.save().then(newUser => {
+        reply(newUser).code(201);
+      }).catch(err => {
+        reply(Boom.badImplementation('error creating user'));
+      });
     });
   },
 
@@ -86,6 +91,27 @@ exports.authenticate = {
   handler: function (request, reply) {
     const user = request.payload;
     User.findOne({ email: user.email }).then(foundUser => {
+      bcrypt.compare(user.password, foundUser.password, function (err, isUser) {
+        if (isUser) {
+          reply(foundUser).code(201);
+        } else {
+          reply(Boom.notFound('internal db failure'));
+        }
+      }).catch(err => {
+        reply(Boom.notFound('internal db failure'));
+      });
+    });
+  },
+
+};
+
+/*exports.authenticate = {
+
+  auth: false,
+
+  handler: function (request, reply) {
+    const user = request.payload;
+    User.findOne({ email: user.email }).then(foundUser => {
       if (foundUser && foundUser.password === user.password) {
         const token = utils.createToken(foundUser);
         reply({ success: true, token: token }).code(201);
@@ -97,7 +123,7 @@ exports.authenticate = {
     });
   },
 
-};
+};*/
 
 exports.follow = {
   auth: false,

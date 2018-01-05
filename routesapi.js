@@ -10,7 +10,7 @@ module.exports = [
   { method: 'POST', path: '/api/users', config: UsersApi.create },
   { method: 'DELETE', path: '/api/users/{id}', config: UsersApi.deleteOne },
   { method: 'DELETE', path: '/api/users', config: UsersApi.deleteAll },
-  { method: 'POST', path: '/api/users/[{id}/follow', config: UsersApi.followuser },
+  { method: 'POST', path: '/api/users/{id}/follow', config: UsersApi.followuser },
   { method: 'POST', path: '/api/users/{id}/unfollow', config: UsersApi.unfollowuser },
 
   { method: 'POST', path: '/api/users/authenticate', config: UsersApi.authenticate },

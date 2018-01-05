@@ -104,19 +104,21 @@ exports.followuser = {
   auth: false,
 
   handler: function (request, reply) {
-    let loggedInUser = request.auth.credentials.loggedInUser;
-    const userId = request.params.id;
-    User.findOne({ email: loggedInUser }).then(currentUser => {
-      User.findOne({ _id: userId }).then(foundUser => {
+    //let loggedInUser = request.auth.credentials.loggedInUser;
+    let userId = request.params.id;
+    let followId = request.payload;
+    User.findOne({ _id: userId }).then(currentUser => {
+      User.findOne({ _id: followId }).then(foundUser => {
         currentUser.following.push(foundUser._id);
         foundUser.followers.push(currentUser._id);
         foundUser.isFollowed = true;
         currentUser.save();
-        foundUser.save();
-        reply.redirect('/allhootslist');
+        foundUser.save().then(User => {
+          reply(User).code(201);
+        });
       });
     }).catch(err => {
-      reply.redirect('/');
+      reply(Boom.badImplementation('Error following user'));
     });
   },
 };
@@ -125,19 +127,21 @@ exports.unfollowuser = {
   auth: false,
 
   handler: function (request, reply) {
-    let loggedInUser = request.auth.credentials.loggedInUser;
-    const userId = request.params.id;
-    User.findOne({ email: loggedInUser }).then(currentUser => {
-      User.findOne({ _id: userId }).then(foundUser => {
+    //let loggedInUser = request.auth.credentials.loggedInUser;
+    let userId = request.params.id;
+    let unFollowId = request.payload;
+    User.findOne({ _id: userId }).then(currentUser => {
+      User.findOne({ _id: unfollowId }).then(foundUser => {
         currentUser.following.splice(foundUser._id, 1);
         foundUser.followers.splice(currentUser._id, 1);
         foundUser.isFollowed = false;
         currentUser.save();
-        foundUser.save();
-        reply.redirect('/allhootslist');
+        foundUser.save().then(User => {
+          reply(User).code(201);
+        });
       });
     }).catch(err => {
-      reply.redirect('/');
+      reply(Boom.badImplementation('Error unfollowing user'));
     });
   },
 };

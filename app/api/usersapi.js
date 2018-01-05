@@ -131,8 +131,8 @@ exports.unfollow = {
     let unfollowId = request.payload;
     User.findOne({ _id: userId }).then(currentUser => {
       User.findOne({ _id: unfollowId }).then(foundUser => {
-        currentUser.following.splice(foundUser._id, 1);
-        foundUser.followers.splice(currentUser._id, 1);
+        currentUser.following.remove(unfollowId);
+        foundUser.followers.remove(userId);
         foundUser.isFollowed = false;
         foundUser.save();
         currentUser.save().then(User => {

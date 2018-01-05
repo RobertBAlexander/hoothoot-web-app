@@ -128,14 +128,14 @@ exports.unfollow = {
   handler: function (request, reply) {
     //let loggedInUser = request.auth.credentials.loggedInUser;
     let userId = request.params.id;
-    let unFollowId = request.payload;
+    let unfollowId = request.payload;
     User.findOne({ _id: userId }).then(currentUser => {
       User.findOne({ _id: unfollowId }).then(foundUser => {
         currentUser.following.splice(foundUser._id, 1);
         foundUser.followers.splice(currentUser._id, 1);
         foundUser.isFollowed = false;
-        currentUser.save();
-        foundUser.save().then(User => {
+        foundUser.save();
+        currentUser.save().then(User => {
           reply(User).code(201);
         });
       });

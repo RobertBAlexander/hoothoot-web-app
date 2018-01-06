@@ -112,7 +112,7 @@ exports.authenticate = {
           reply.code(204);
         }
       }).catch(err => {
-        reply.code(204);
+        reply(Boom.notFound('internal db failure'));
       });
     });
   },

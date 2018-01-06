@@ -49,7 +49,8 @@ exports.report = {
 
           const followers = currentUser.followers.length;
           const following = currentUser.following.length;
-          Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' }).then(hootList => {
+          Hoot.find({ hooter: currentUser._id }).populate('hooter').sort({ date: 'desc' })
+              .then(hootList => {
             reply.view('report', {
               title: 'Hoots to Date',
               followers: followers,
@@ -110,7 +111,8 @@ exports.personaltimeline = {
     const userEmail = request.auth.credentials.loggedInUser;
     User.findOne({ email: userEmail }).then(currentUser => {
       User.find({ _id: currentUser.following }).then(followedUsers => {
-        Hoot.find({ hooter: followedUsers }).populate('user').sort({ date: 'desc' }).then(personalHoots => {
+        Hoot.find({ hooter: followedUsers }).populate('user').sort({ date: 'desc' })
+            .then(personalHoots => {
           /*          if (hootList.length === 0) {
 
                     }*/

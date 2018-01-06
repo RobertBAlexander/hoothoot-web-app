@@ -2,6 +2,7 @@
  * Created by Robert Alexander
  **/
 const Hoot = require('../models/hoot');
+const User = require('../models/user');
 const Boom = require('boom');
 const utils = require('./utils.js');
 
@@ -78,3 +79,31 @@ exports.deleteOne = {
   },
 
 };
+
+exports.getFollowedHoots = {
+  auth: false,
+
+  handler: function (request, reply) {
+    const userEmail = request.auth.credentials.loggedInUser;
+
+    User.findOne({ email: userEmail }).then(currentUser => {
+      User.find({ _id: currentUser.following }).then(followedUsers => {
+        Hoot.find({ hooter: followedUsers }).populate('user').sort({ date: 'desc' })
+            .then(personalHoots => {
+              if (personalHoots != null) {
+                reply(personalHoots);
+              } else {
+                reply(Boom.notFound('hoots not found'));
+              }
+            }).catch(err => {
+          reply(Boom.notFound('hoots not found'));
+        });
+      }).catch(err => {
+        reply(Boom.notFound('followed users not found'));
+      });
+    }).catch(err => {
+      reply(Boom.notFound('current user not found'));
+    });
+  },
+};
+

@@ -88,8 +88,7 @@ exports.getFollowedHoots = {
 
     User.findOne({ _id: userId }).then(currentUser => {
       User.find({ _id: currentUser.following }).then(followedUsers => {
-        Hoot.find({ hooter: followedUsers }).populate('user').sort({ date: 'desc' })
-            .then(personalHoots => {
+        Hoot.find({ hooter: followedUsers }).exec().then(personalHoots => {
               if (personalHoots != null) {
                 reply(personalHoots);
               } else {

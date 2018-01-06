@@ -84,9 +84,9 @@ exports.getFollowedHoots = {
   auth: false,
 
   handler: function (request, reply) {
-    const userEmail = request.auth.credentials.loggedInUser;
+    let userId = request.params.id;
 
-    User.findOne({ email: userEmail }).then(currentUser => {
+    User.findOne({ _id: userId }).then(currentUser => {
       User.find({ _id: currentUser.following }).then(followedUsers => {
         Hoot.find({ hooter: followedUsers }).populate('user').sort({ date: 'desc' })
             .then(personalHoots => {

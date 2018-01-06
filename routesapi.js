@@ -9,6 +9,7 @@ module.exports = [
   { method: 'GET', path: '/api/users/{id}', config: UsersApi.findOne },
   { method: 'POST', path: '/api/users', config: UsersApi.create },
   { method: 'GET', path: '/api/users/{id}/followed', config: HootsApi.getFollowedHoots },
+  { method: 'GET', path: '/api/users/{id}/hootsof', config: HootsApi.getHootsOf },
   { method: 'DELETE', path: '/api/users/{id}', config: UsersApi.deleteOne },
   { method: 'DELETE', path: '/api/users', config: UsersApi.deleteAll },
   { method: 'POST', path: '/api/users/{id}/follow', config: UsersApi.follow },

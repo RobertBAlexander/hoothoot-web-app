@@ -88,9 +88,9 @@ exports.getFollowedHoots = {
 
     User.findOne({ _id: userId }).then(currentUser => {
       User.find({ _id: currentUser.following }).then(followedUsers => {
-        Hoot.find({ hooter: followedUsers }).exec().then(personalHoots => {
-              if (personalHoots != null) {
-                reply(personalHoots);
+        Hoot.find({ hooter: followedUsers }).exec().then(followHoots => {
+              if (followHoots != null) {
+                reply(followHoots);
               } else {
                 reply(Boom.notFound('hoots not found'));
               }
@@ -106,3 +106,23 @@ exports.getFollowedHoots = {
   },
 };
 
+exports.getHootsOf = {
+  auth: false,
+
+  handler: function (request, reply) {
+    let userId = request.params.id;
+
+    User.findOne({ _id: userId }).then(thisUser => {
+      Hoot.find({ hooter: thisUser }).exec().then(personalHoots => {
+        if (personalHoots != null) {
+          reply(personalHoots);
+        } else {
+          reply(Boom.notFound('hoots not found'));
+        }
+
+      });
+    }).catch(err => {
+      reply(Boom.notFound('current user not found'));
+    });
+  },
+};

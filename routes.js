@@ -32,6 +32,7 @@ module.exports = [
   { method: 'GET', path: '/report', config: Hoots.report },
   { method: 'GET', path: '/allhootslist', config: Hoots.allhootslist },
   { method: 'GET', path: '/viewotheruser/{id}', config: Hoots.viewotheruser },
+  { method: 'GET', path: '/personaltimeline', config: Hoots.personaltimeline },
 
   { method: 'POST', path: '/hoot', config: Hoots.hoot },
   { method: 'GET', path: '/getPic/{id}', config: Hoots.getPic },

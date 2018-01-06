@@ -104,6 +104,31 @@ exports.viewotheruser = {
   },
 };
 
+exports.personaltimeline = {
+
+  handler: function (request, reply) {
+    const userEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: userEmail }).then(currentUser => {
+      User.find({ _id: currentUser.following }).then(followedUsers => {
+        Hoot.find({ hooter: followedUsers }).populate('user').sort({ date: 'desc' }).then(personalHoots => {
+          /*          if (hootList.length === 0) {
+
+                    }*/
+          reply.view('personaltimeline', {
+            title: 'My personal timeline',
+            user: currentUser,
+            hoots: personalHoots,
+          });
+        });
+      }).catch(err => {
+        console.log('Error loading dashboard: ' + err);
+        res.redirect('/');
+      });
+    });
+  },
+
+};
+
 exports.hoot = {
 
   validate: {

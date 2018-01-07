@@ -103,4 +103,5 @@ Persistence:
 Git Repository: https://github.com/RobertBAlexander/hoothoot-web-app
 
 Heroku site: https://hoothoot-web.herokuapp.com/
-(note, database seems to have issues in heroku)
+
+AWS link: http://34.241.149.128:4000/
